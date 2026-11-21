@@ -1,6 +1,7 @@
 revealEmail: "Click to reveal email"
 totalContributions: "Count of contributions in last year"
 toggleTheme: "Toggle theme"
+copyCode: "Copy code"
 status:
   maintained: "Maintained"
   completed: "Completed"

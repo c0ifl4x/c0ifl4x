@@ -145,6 +145,7 @@ public interface JArgonautEntrypoint {
     return new FlexmarkFrontmatterMdParser(
       b.getSyntaxHighlighter(),
       b.getMathRenderer(),
+      b.getSiteBuildContext().getDictionaries(),
       b.getYamlParser(),
       b.getEventBus()
     );

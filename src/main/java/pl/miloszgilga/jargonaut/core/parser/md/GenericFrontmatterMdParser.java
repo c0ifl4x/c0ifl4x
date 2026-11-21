@@ -6,6 +6,7 @@ import pl.miloszgilga.jargonaut.core.event.BuildEventBus;
 import pl.miloszgilga.jargonaut.core.parser.DocumentParser;
 import pl.miloszgilga.jargonaut.core.parser.ParsedDocument;
 import pl.miloszgilga.jargonaut.core.parser.yaml.YamlParser;
+import pl.miloszgilga.jargonaut.dictionary.Dictionaries;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,10 +15,12 @@ import java.util.Locale;
 
 public abstract class GenericFrontmatterMdParser implements DocumentParser {
   private final YamlParser yamlParser;
+  private final Dictionaries dictionaries;
 
-  protected GenericFrontmatterMdParser(BuildEventBus eventBus, YamlParser yamlParser) {
+  protected GenericFrontmatterMdParser(BuildEventBus eventBus, Dictionaries dictionaries, YamlParser yamlParser) {
     eventBus.publish(BuildEvent.spinnerDetail("Registering frontmatter Markdown parser: " +
       getClass().getSimpleName()));
+    this.dictionaries = dictionaries;
     this.yamlParser = yamlParser;
   }
 
@@ -44,12 +47,12 @@ public abstract class GenericFrontmatterMdParser implements DocumentParser {
       if (!yamlContent.isEmpty()) {
         metadata = yamlParser.parseAndValidateYamlString(yamlContent, metadataClass);
       }
-      final String htmlContent = renderHtml(markdownContent);
+      final String htmlContent = renderHtml(markdownContent, fileLocale, dictionaries);
       return new ParsedDocument<>(fileLocale, metadata, htmlContent);
     } catch (IOException ex) {
       throw new GenerationHaltedException(ex);
     }
   }
 
-  protected abstract String renderHtml(String markdownContent);
+  protected abstract String renderHtml(String markdownContent, Locale locale, Dictionaries dictionaries);
 }

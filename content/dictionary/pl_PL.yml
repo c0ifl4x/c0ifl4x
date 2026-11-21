@@ -1,6 +1,7 @@
 revealEmail: "Kliknij, aby pokazać e-mail"
 totalContributions: "Liczba kontrybucji w ostatnim roku"
 toggleTheme: "Przełącz motyw"
+copyCode: "Skopiuj kod"
 status:
   maintained: "Utrzymywany"
   completed: "Ukończony"

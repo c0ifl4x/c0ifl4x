@@ -100,8 +100,8 @@ public class JArgonautBootstrapper {
       readGlobalConfiguration();
       initializeDataExtractors();
       initializeGraalVmEngine();
-      initializeMarkdownRenderer();
       runPreParsingAndPreparation();
+      initializeMarkdownRenderer();
       runParsingContent();
       runRenderingContent();
       generateAndSaveOutputFiles();
@@ -178,6 +178,7 @@ public class JArgonautBootstrapper {
   }
 
   private void initializeMarkdownRenderer() {
+    eventBus.publish(BuildEvent.startStage("renderer initialization"));
     eventBus.publish(BuildEvent.startTask("Initialize Markdown renderer..."));
     documentParser = entrypoint.documentParser(this);
     eventBus.publish(BuildEvent.endTask("Initialized Markdown renderer"));
