@@ -1,20 +1,22 @@
-package pl.miloszgilga.jargonaut.core.parser.md;
+package pl.miloszgilga.jargonaut.core.parser.md.renderer.extension;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 
 import org.jetbrains.annotations.NotNull;
 
+import pl.miloszgilga.jargonaut.core.parser.md.renderer.MathNodeRenderer;
 import pl.miloszgilga.jargonaut.core.polyglot.MathRenderer;
-import pl.miloszgilga.jargonaut.core.polyglot.SyntaxHighlighter;
 
-public class PreRenderExtension implements HtmlRenderer.HtmlRendererExtension {
-  private final SyntaxHighlighter highlighter;
+public class MathExtension implements HtmlRenderer.HtmlRendererExtension {
   private final MathRenderer mathRenderer;
 
-  public PreRenderExtension(SyntaxHighlighter highlighter, MathRenderer mathRenderer) {
-    this.highlighter = highlighter;
+  private MathExtension(MathRenderer mathRenderer) {
     this.mathRenderer = mathRenderer;
+  }
+
+  public static MathExtension create(MathRenderer mathRenderer) {
+    return new MathExtension(mathRenderer);
   }
 
   @Override
@@ -23,6 +25,6 @@ public class PreRenderExtension implements HtmlRenderer.HtmlRendererExtension {
 
   @Override
   public void extend(HtmlRenderer.@NotNull Builder htmlRendererBuilder, @NotNull String rendererType) {
-    htmlRendererBuilder.nodeRendererFactory(options -> new CustomNodeRenderer(highlighter, mathRenderer));
+    htmlRendererBuilder.nodeRendererFactory(options -> new MathNodeRenderer(mathRenderer));
   }
 }

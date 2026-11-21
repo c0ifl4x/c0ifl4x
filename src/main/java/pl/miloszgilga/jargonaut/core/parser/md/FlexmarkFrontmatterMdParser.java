@@ -7,6 +7,8 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
 import pl.miloszgilga.jargonaut.core.event.BuildEventBus;
+import pl.miloszgilga.jargonaut.core.parser.md.renderer.extension.CodeHighlightExtension;
+import pl.miloszgilga.jargonaut.core.parser.md.renderer.extension.MathExtension;
 import pl.miloszgilga.jargonaut.core.parser.yaml.YamlParser;
 import pl.miloszgilga.jargonaut.core.polyglot.MathRenderer;
 import pl.miloszgilga.jargonaut.core.polyglot.SyntaxHighlighter;
@@ -30,7 +32,8 @@ public class FlexmarkFrontmatterMdParser extends GenericFrontmatterMdParser {
     mdParser = Parser.builder(options).build();
     htmlRenderer = HtmlRenderer.builder(options)
       .extensions(List.of(
-        new PreRenderExtension(syntaxHighlighter, mathRenderer)
+        CodeHighlightExtension.create(syntaxHighlighter),
+        MathExtension.create(mathRenderer)
       ))
       .build();
   }
