@@ -1,5 +1,6 @@
 .toc {
   position: sticky;
+  overflow: hidden;
   box-sizing: border-box;
   float: right;
   top: 2rem;
@@ -33,7 +34,7 @@
   color: var(--primary-link-hover);
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 1650px) {
   .toc {
     display: none;
   }
