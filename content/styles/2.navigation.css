@@ -41,7 +41,7 @@
   grid-template-columns: minmax(0, auto) max-content;
   max-width: var(--safety-width);
   margin: 0 auto;
-  padding: 0 4vw;
+  padding: 0 3vw;
 }
 
 .navbar__left,
