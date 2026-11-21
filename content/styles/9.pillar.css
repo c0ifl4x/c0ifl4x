@@ -60,6 +60,7 @@
   line-height: 1.4rem;
   margin: 0 0 1rem 0;
   color: var(--pillar-header-muted);
+  text-align: center;
 }
 
 .pillar-caption__description,
