@@ -29,7 +29,7 @@ public class EmailManglingHtmlPostProcessor extends GenericHtmlPostProcessor {
     if (mailtoLinks.isEmpty()) {
       return rawHtml;
     }
-    final String revealPlaceholder = (String) context.getDictionaries().get(locale).get("revealEmail");
+    final String revealPlaceholder = context.getDictionaries().resolve(locale, "revealEmail");
     for (final Element link : mailtoLinks) {
       final String href = link.attr("href");
       final String rawEmail = href.substring(7).split("\\?")[0].trim();

@@ -8,6 +8,7 @@ import pl.miloszgilga.jargonaut.core.event.BuildEventBus;
 import pl.miloszgilga.jargonaut.core.parser.GenericPage;
 import pl.miloszgilga.jargonaut.core.parser.PageRepresentation;
 import pl.miloszgilga.jargonaut.core.template.generator.RenderedTextContent;
+import pl.miloszgilga.jargonaut.dictionary.Dictionaries;
 import pl.miloszgilga.jargonaut.globals.model.GlobalsMetadata;
 
 import java.nio.file.Path;
@@ -23,9 +24,9 @@ public class SiteBuildContext {
   private final BuildEventBus eventBus;
 
   private Config config;
+  private Dictionaries dictionaries;
 
   private final Map<Locale, GlobalsMetadata> globals = new HashMap<>();
-  private final Map<Locale, Map<String, Object>> dictionaries = new HashMap<>();
   private final Set<Locale> activeLocales = new HashSet<>();
 
   private final Map<Class<?>, Object> sharedPageData = new HashMap<>();
@@ -52,12 +53,16 @@ public class SiteBuildContext {
     this.config = config;
   }
 
-  public Map<Locale, GlobalsMetadata> getGlobals() {
-    return globals;
+  public Dictionaries getDictionaries() {
+    return dictionaries;
   }
 
-  public Map<Locale, Map<String, Object>> getDictionaries() {
-    return dictionaries;
+  public void setDictionaries(Dictionaries dictionaries) {
+    this.dictionaries = dictionaries;
+  }
+
+  public Map<Locale, GlobalsMetadata> getGlobals() {
+    return globals;
   }
 
   public Set<Locale> getActiveLocales() {

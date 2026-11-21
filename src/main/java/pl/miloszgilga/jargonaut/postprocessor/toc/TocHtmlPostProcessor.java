@@ -81,7 +81,7 @@ public class TocHtmlPostProcessor extends GenericHtmlPostProcessor {
       if (!rootItems.isEmpty()) {
         final String renderedToc = templateEngine
           .render(FreemarkerTemplateName.TOC_PLACEHOLDER, Map.of(
-            "i18n", context.getDictionaries().get(locale),
+            "i18n", context.getDictionaries().ofLocale(locale),
             "toc", rootItems
           ), locale);
         placeholder.replaceWith(Jsoup.parseBodyFragment(renderedToc).body().child(0));

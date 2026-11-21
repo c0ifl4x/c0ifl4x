@@ -22,7 +22,7 @@ public class DictionaryProcessor extends YamlMergingProcessor {
     final Map<Locale, Map<String, Object>> globalI18n = CastUtils
       .unsafeCast(loadYamlTranslations(resourcePath, Map.class, locale));
     mergeDictionaryMaps(globalI18n, locale);
-    context.getDictionaries().putAll(globalI18n);
+    context.setDictionaries(new Dictionaries(globalI18n));
     context.getActiveLocales().addAll(globalI18n.keySet());
   }
 

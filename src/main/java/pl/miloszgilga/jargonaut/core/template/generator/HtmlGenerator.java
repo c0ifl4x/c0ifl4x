@@ -87,7 +87,7 @@ public abstract class HtmlGenerator<T extends GenericPage> {
         config,
         langPrefix
       );
-      final Map<String, Object> i18n = siteBuildContext.getDictionaries().get(locale);
+      final Map<String, Object> i18n = siteBuildContext.getDictionaries().ofLocale(locale);
       renderedTextContents.add(renderHtml(
         locale,
         config,
