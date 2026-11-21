@@ -70,6 +70,8 @@ espIdf {
 | `rebuildFirmware` | Wymusza rekonfigurację CMake i wykonuje pełną przebudowę firmware'u.                      |
 | `flashFirmware`   | Buduje i wgrywa pełny firmware na płytkę.                                                 |
 | `flashAppOnly`    | Buduje i wgrywa wyłącznie partycję aplikacji na płytkę.                                   |
+| `monitorFirmware` | Otwiera monitor portu szeregowego z dekodowaniem śladów stosu (backtrace).                |
+| `runFirmware`     | Buduje, wgrywa pełny firmware na płytkę i natychmiast uruchamia monitor szeregowy.        |
 | `eraseFlash`      | Czyści całą pamięć flash układu (w tym NVS oraz pozostałe partycje).                      |
 | `cleanFirmware`   | Czyści pliki wyjściowe budowania (`idf.py fullclean`).                                    |
 | `generateDocs`    | Generuje dokumentację projektu przy użyciu narzędzia Doxygen.                             |

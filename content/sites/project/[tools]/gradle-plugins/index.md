@@ -86,6 +86,8 @@ espIdf {
 | `rebuildFirmware` | Forces CMake reconfiguration and performs a full firmware rebuild.               |
 | `flashFirmware`   | Builds and flashes the full firmware to the board.                               |
 | `flashAppOnly`    | Builds and flashes only the application partition to the board.                  |
+| `monitorFirmware` | Opens the serial monitor with address-to-line backtrace decoding.                |
+| `runFirmware`     | Builds, flashes the full firmware, and immediately starts the serial monitor.    |
 | `eraseFlash`      | Erases the entire flash memory on the chip (including NVS and other partitions). |
 | `cleanFirmware`   | Cleans build output files (`idf.py fullclean`).                                  |
 | `generateDocs`    | Generates project documentation using Doxygen.                                   |
