@@ -2,8 +2,10 @@ package pl.miloszgilga.jargonaut.postprocessor;
 
 import pl.miloszgilga.jargonaut.core.event.BuildEvent;
 import pl.miloszgilga.jargonaut.core.event.BuildEventBus;
+import pl.miloszgilga.jargonaut.core.processor.SiteBuildContext;
 import pl.miloszgilga.jargonaut.core.template.generator.HtmlPostProcessor;
 
+import java.util.Locale;
 import java.util.Map;
 
 public abstract class GenericHtmlPostProcessor implements HtmlPostProcessor {
@@ -14,4 +16,14 @@ public abstract class GenericHtmlPostProcessor implements HtmlPostProcessor {
   @Override
   public void insertPageAttributesBeforeRender(Map<String, Object> pageAttributes) {
   }
+
+  @Override
+  public final String process(String rawHtml, Locale locale, SiteBuildContext context) {
+    if (rawHtml == null) {
+      return null;
+    }
+    return safetyProcess(rawHtml, locale, context);
+  }
+
+  protected abstract String safetyProcess(String rawHtml, Locale locale, SiteBuildContext context);
 }

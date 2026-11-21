@@ -10,14 +10,14 @@ import pl.miloszgilga.jargonaut.core.parser.UrlNormalizer;
 import pl.miloszgilga.jargonaut.core.processor.SiteBuildContext;
 import pl.miloszgilga.jargonaut.core.template.FreemarkerTemplateName;
 import pl.miloszgilga.jargonaut.core.template.TemplateEngine;
-import pl.miloszgilga.jargonaut.postprocessor.GenericHtmlPostProcessor;
+import pl.miloszgilga.jargonaut.postprocessor.JsoupHtmlPostProcessor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class TocHtmlPostProcessor extends GenericHtmlPostProcessor {
+public class TocHtmlPostProcessor extends JsoupHtmlPostProcessor {
   private static final String TOC_PLACEHOLDER_ID = "toc-placeholder";
 
   private final UrlNormalizer urlNormalizer;
@@ -30,8 +30,7 @@ public class TocHtmlPostProcessor extends GenericHtmlPostProcessor {
   }
 
   @Override
-  public String process(String rawHtml, Locale locale, SiteBuildContext context) {
-    final Document doc = Jsoup.parse(rawHtml);
+  protected String jsoupProcess(Document doc, Locale locale, SiteBuildContext context) {
     final Elements headings = doc.select("h2, h3, h4, h5, h6");
     final List<TocItem> rootItems = buildTocTree(headings);
     injectRenderedToc(doc, rootItems, context, locale);

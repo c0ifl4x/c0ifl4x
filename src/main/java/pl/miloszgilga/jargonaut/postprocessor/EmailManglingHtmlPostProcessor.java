@@ -1,8 +1,6 @@
 package pl.miloszgilga.jargonaut.postprocessor;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -13,21 +11,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Locale;
 
-public class EmailManglingHtmlPostProcessor extends GenericHtmlPostProcessor {
+public class EmailManglingHtmlPostProcessor extends JsoupHtmlPostProcessor {
   public EmailManglingHtmlPostProcessor(BuildEventBus eventBus) {
     super(eventBus);
   }
 
   @Override
-  public String process(String rawHtml, Locale locale, SiteBuildContext context) {
-    if (rawHtml == null || !rawHtml.contains("mailto:")) {
-      return rawHtml;
-    }
-    final Document doc = Jsoup.parse(rawHtml);
-    doc.outputSettings().prettyPrint(false);
+  protected String jsoupProcess(Document doc, Locale locale, SiteBuildContext context) {
     final Elements mailtoLinks = doc.select("a[href^=mailto:]");
     if (mailtoLinks.isEmpty()) {
-      return rawHtml;
+      return doc.html();
     }
     final String revealPlaceholder = context.getDictionaries().resolve(locale, "revealEmail");
     for (final Element link : mailtoLinks) {
