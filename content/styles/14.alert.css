@@ -1,0 +1,42 @@
+.markdown-alert {
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  color: var(--primary-text);
+  background-color: var(--alert-bg, var(--surface-bg));
+  border-left: 4px solid var(--alert-accent, var(--surface-border));
+}
+
+.markdown-alert > :last-child {
+  margin-bottom: 0;
+}
+
+.markdown-alert__title {
+  margin: 0 0 0.35rem 0;
+  font-weight: 700;
+  color: var(--alert-accent);
+}
+
+.markdown-alert--note {
+  --alert-accent: var(--alert-note-color);
+  --alert-bg: var(--alert-note-bg);
+}
+
+.markdown-alert--tip {
+  --alert-accent: var(--alert-tip-color);
+  --alert-bg: var(--alert-tip-bg);
+}
+
+.markdown-alert--important {
+  --alert-accent: var(--alert-important-color);
+  --alert-bg: var(--alert-important-bg);
+}
+
+.markdown-alert--warning {
+  --alert-accent: var(--alert-warning-color);
+  --alert-bg: var(--alert-warning-bg);
+}
+
+.markdown-alert--caution {
+  --alert-accent: var(--alert-caution-color);
+  --alert-bg: var(--alert-caution-bg);
+}

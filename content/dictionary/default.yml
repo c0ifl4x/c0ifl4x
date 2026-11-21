@@ -8,6 +8,12 @@ status:
   wip: "Work in progress"
   ongoing: "In process"
   updated: "Recently updated"
+alert:
+  note: "Note"
+  tip: "Tip"
+  important: "Important"
+  warning: "Warning"
+  caution: "Caution"
 nav:
   caption: "Navigation"
   home: "Home"

@@ -48,6 +48,17 @@
   --badge-table-abandoned-text: var(--badge-abandoned-text);
   --badge-table-maintained-bg: var(--badge-maintained-bg);
 
+  --alert-note-color: #3a6ea5;
+  --alert-note-bg: #eff3f7;
+  --alert-tip-color: #336622;
+  --alert-tip-bg: #eff4ed;
+  --alert-important-color: #704b8a;
+  --alert-important-bg: #f4eff7;
+  --alert-warning-color: #9a6b19;
+  --alert-warning-bg: #faf5e8;
+  --alert-caution-color: #a63232;
+  --alert-caution-bg: #f9efef;
+
   --alphabet-group-border: #e0e0e0;
   --alphabet-group-surface-bg: #f0f0f0;
 
@@ -124,6 +135,17 @@
   --badge-table-abandoned-bg: #222222;
   --badge-table-abandoned-text: #7a7a7a;
   --badge-table-maintained-bg: #1b4252;
+
+  --alert-note-color: #5b9bd5;
+  --alert-note-bg: #171e26;
+  --alert-tip-color: #568a39;
+  --alert-tip-bg: #172014;
+  --alert-important-color: #a374c4;
+  --alert-important-bg: #1f1724;
+  --alert-warning-color: #cca047;
+  --alert-warning-bg: #221d12;
+  --alert-caution-color: #d45d5d;
+  --alert-caution-bg: #241616;
 
   --alphabet-group-border: #333333;
   --alphabet-group-surface-bg: #1c1c1c;

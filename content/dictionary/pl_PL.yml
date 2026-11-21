@@ -8,6 +8,12 @@ status:
   wip: "W trakcie tworzenia"
   ongoing: "W trakcie"
   updated: "Ostatnio zaktualizowany"
+alert:
+  note: "Informacja"
+  tip: "Wskazówka"
+  important: "Ważne"
+  warning: "Ostrzeżenie"
+  caution: "Uwaga"
 nav:
   caption: "Nawigacja"
   home: "Start"

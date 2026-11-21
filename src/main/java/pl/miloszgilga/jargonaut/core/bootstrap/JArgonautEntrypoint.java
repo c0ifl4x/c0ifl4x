@@ -47,6 +47,7 @@ import pl.miloszgilga.jargonaut.dictionary.DictionaryProcessor;
 import pl.miloszgilga.jargonaut.globals.GlobalsProcessor;
 import pl.miloszgilga.jargonaut.postprocessor.EmailManglingHtmlPostProcessor;
 import pl.miloszgilga.jargonaut.postprocessor.ExternalLinkHtmlPostProcessor;
+import pl.miloszgilga.jargonaut.postprocessor.GitHubAlertPostProcessor;
 import pl.miloszgilga.jargonaut.postprocessor.toc.TocHtmlPostProcessor;
 import pl.miloszgilga.jargonaut.rss.RssProcessor;
 
@@ -112,6 +113,7 @@ public interface JArgonautEntrypoint {
     htmlPostProcessors.add(new TocHtmlPostProcessor(b.getUrlNormalizer(), b.getTemplateEngine(), b.getEventBus()));
     htmlPostProcessors.add(new EmailManglingHtmlPostProcessor(b.getEventBus()));
     htmlPostProcessors.add(new ExternalLinkHtmlPostProcessor(b.getEventBus()));
+    htmlPostProcessors.add(new GitHubAlertPostProcessor(b.getEventBus()));
   }
 
   default void attachRepoStatsExtractor(JArgonautBootstrapper b, List<RepoStatsExtractor> repoStatsExtractors) {
