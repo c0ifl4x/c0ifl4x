@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "pl.miloszgilga"
-version = "1.1.6"
+version = "2.1.6"
 
 java {
   toolchain {
