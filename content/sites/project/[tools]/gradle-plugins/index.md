@@ -19,17 +19,17 @@ repoUrls:
   - url: "https://github.com/c0ifl4x/gradle-plugins"
 downloadUrls:
   - name: "ESP-IDF plugin (JAR)"
-    url: "https://m2.miloszgilga.pl/#/releases/pl/miloszgilga/gradle/esp-idf-plugin"
+    url: "https://m2.miloszgilga.pl/#/releases/pl/miloszgilga/gradle/plugin-esp-idf"
 docsUrls:
   - name: "ESP-IDF plugin (Javadoc)"
-    url: "https://m2.miloszgilga.pl/javadoc/releases/pl/miloszgilga/gradle/esp-idf-plugin/latest"
+    url: "https://m2.miloszgilga.pl/javadoc/releases/pl/miloszgilga/gradle/plugin-esp-idf/latest"
 ---
 
 ## Available plugins
 
 | Module           | Plugin ID                      | Description                                                                          | Docs                                                                                              | Repository                                                                              |
 |:-----------------|:-------------------------------|:-------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------|
-| `esp-idf-plugin` | `pl.miloszgilga.gradle.espidf` | Cross-platform Gradle wrapper for ESP-IDF firmware projects (Windows, Linux, macOS). | [Javadoc](https://m2.miloszgilga.pl/javadoc/releases/pl/miloszgilga/gradle/esp-idf-plugin/latest) | [Reposilite](https://m2.miloszgilga.pl/#/releases/pl/miloszgilga/gradle/esp-idf-plugin) |
+| `plugin-esp-idf` | `pl.miloszgilga.gradle.espidf` | Cross-platform Gradle wrapper for ESP-IDF firmware projects (Windows, Linux, macOS). | [Javadoc](https://m2.miloszgilga.pl/javadoc/releases/pl/miloszgilga/gradle/plugin-esp-idf/latest) | [Reposilite](https://m2.miloszgilga.pl/#/releases/pl/miloszgilga/gradle/plugin-esp-idf) |
 
 ## Usage
 
@@ -52,7 +52,7 @@ pluginManagement {
 }
 ```
 
-### Usage of `esp-idf-plugin`
+### Usage of `plugin-esp-idf`
 
 > [!NOTE]
 > To use this plugin, you must still have the **ESP-IDF** framework installed and configured on your system. This plugin

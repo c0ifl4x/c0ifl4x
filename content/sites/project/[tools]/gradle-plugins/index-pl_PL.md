@@ -3,17 +3,17 @@ kind: "Wtyczki Gradle"
 summary: "Kolekcja autorskich wtyczek Gradle do tworzenia oprogramowania wbudowanego, rozwoju platform oraz automatyzacji budowania w moich projektach monorepo opartych na Gradle."
 downloadUrls:
   - name: "Plugin ESP-IDF (JAR)"
-    url: "https://m2.miloszgilga.pl/#/releases/pl/miloszgilga/gradle/esp-idf-plugin"
+    url: "https://m2.miloszgilga.pl/#/releases/pl/miloszgilga/gradle/plugin-esp-idf"
 docsUrls:
   - name: "Plugin ESP-IDF (Javadoc)"
-    url: "https://m2.miloszgilga.pl/javadoc/releases/pl/miloszgilga/gradle/esp-idf-plugin/latest"
+    url: "https://m2.miloszgilga.pl/javadoc/releases/pl/miloszgilga/gradle/plugin-esp-idf/latest"
 ---
 
 ## Dostępne wtyczki
 
 | Moduł            | ID pluginu                     | Opis                                                                                     | Dokumentacja                                                                                      | Repozytorium                                                                            |
 |:-----------------|:-------------------------------|:-----------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------|
-| `esp-idf-plugin` | `pl.miloszgilga.gradle.espidf` | Wieloplatformowa nakładka Gradle dla projektów firmware ESP-IDF (Windows, Linux, macOS). | [Javadoc](https://m2.miloszgilga.pl/javadoc/releases/pl/miloszgilga/gradle/esp-idf-plugin/latest) | [Reposilite](https://m2.miloszgilga.pl/#/releases/pl/miloszgilga/gradle/esp-idf-plugin) |
+| `plugin-esp-idf` | `pl.miloszgilga.gradle.espidf` | Wieloplatformowa nakładka Gradle dla projektów firmware ESP-IDF (Windows, Linux, macOS). | [Javadoc](https://m2.miloszgilga.pl/javadoc/releases/pl/miloszgilga/gradle/plugin-esp-idf/latest) | [Reposilite](https://m2.miloszgilga.pl/#/releases/pl/miloszgilga/gradle/plugin-esp-idf) |
 
 ## Użycie
 
@@ -36,7 +36,7 @@ pluginManagement {
 }
 ```
 
-### Użycie `esp-idf-plugin`
+### Użycie `plugin-esp-idf`
 
 > [!NOTE]
 > Aby korzystać z tej wtyczki, nadal trzeba mieć zainstalowane i skonfigurowane środowisko **ESP-IDF** w swoim systemie.
