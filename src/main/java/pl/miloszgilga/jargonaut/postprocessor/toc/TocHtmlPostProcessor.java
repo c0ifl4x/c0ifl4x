@@ -31,7 +31,7 @@ public class TocHtmlPostProcessor extends JsoupHtmlPostProcessor {
 
   @Override
   protected String jsoupProcess(Document doc, Locale locale, SiteBuildContext context) {
-    final Elements headings = doc.select("h2, h3, h4, h5, h6");
+    final Elements headings = doc.select("h2, h3");
     final List<TocItem> rootItems = buildTocTree(headings);
     injectRenderedToc(doc, rootItems, context, locale);
     return doc.html();
