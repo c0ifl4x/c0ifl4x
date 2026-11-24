@@ -91,6 +91,8 @@ espIdf {
   baud.set("921600") // domyślnie: "921600"
   appVersion.set("1.0.0") // domyślnie: project.version (lub "0.0.1-local-dev", jeśli nie określono)
   extraComponentDirs.from(rootProject.file("vendor/external-components")) // opcjonalnie: dodatkowe lokalne katalogi komponentów
+  usbipdAutoAttach.set(true) // domyślnie: false (tylko WSL2: automatycznie współdzieli i podpina port USB przez usbipd.exe)
+  usbipdDevicePattern.set("(303a:|10c4:ea60|1a86:|0403:|USB JTAG|CP210|CH340|CH9102)") // opcjonalnie: wyrażenie regularne dopasowujące VID:PID lub nazwę urządzenia
 }
 
 dependencies {
@@ -98,10 +100,20 @@ dependencies {
 }
 ```
 
+> [!TIP]
+> Podczas korzystania z `usbipdAutoAttach` należy pamiętać, że system Windows nie posiada wbudowanego narzędzia
+> `usbipd` - należy je jednorazowo zainstalować po stronie Windowsa z projektu
+> [usbipd-win](https://github.com/dorssel/usbipd-win) (`winget install --interactive --exact dorssel.usbipd-win`). Gdy
+> opcja `usbipdAutoAttach` jest włączona, zadania wymagające portu szeregowego (`flashFirmware`, `monitorFirmware`,
+> `runFirmware`, `eraseFlash`) automatycznie wykonają `bind` (z jednorazowym oknem UAC w Windowsie, jeśli urządzenie ma
+> status `Not shared`) i podepną płytkę do WSL2. Przy uruchomieniu bezpośrednio na natywnym Windowsie, Linuxie lub macOS
+> zadanie `attachUsbWsl` jest pomijane, a komendy `idf.py` korzystają ze standardowego portu lokalnego.
+
 #### Dostępne zadania (grupa `firmware`)
 
 | Zadanie           | Opis                                                                                      |
 |:------------------|:------------------------------------------------------------------------------------------|
+| `attachUsbWsl`    | Współdzieli i podpina wykryte urządzenie USB ESP32 z Windowsa do WSL2 (`usbipd`).         |
 | `checkEnv`        | Weryfikuje, czy środowisko ESP-IDF oraz `idf.py` są poprawnie skonfigurowane.             |
 | `setChip`         | Ustawia docelowy układ mikrokontrolera do kompilacji (np. `esp32c3`, `esp32s3`, `esp32`). |
 | `buildFirmware`   | Buduje pełny firmware (bootloader, tablicę partycji oraz aplikację).                      |

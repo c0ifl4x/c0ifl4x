@@ -106,6 +106,8 @@ espIdf {
   baud.set("921600") // default: "921600"
   appVersion.set("1.0.0") // default: project.version (or "0.0.1-local-dev" if unspecified)
   extraComponentDirs.from(rootProject.file("vendor/external-components")) // optional: additional local component dirs
+  usbipdAutoAttach.set(true) // default: false (WSL2 only: auto-binds and attaches USB device via usbipd.exe)
+  usbipdDevicePattern.set("(303a:|10c4:ea60|1a86:|0403:|USB JTAG|CP210|CH340|CH9102)") // optional: regex matching VID:PID or name
 }
 
 dependencies {
@@ -113,10 +115,19 @@ dependencies {
 }
 ```
 
+> [!TIP]
+> When using `usbipdAutoAttach`, note that Windows does not include `usbipd` out of the box - install
+> [usbipd-win](https://github.com/dorssel/usbipd-win) on the Windows host
+> (`winget install --interactive --exact dorssel.usbipd-win`). When `usbipdAutoAttach` is enabled, serial tasks
+> (`flashFirmware`, `monitorFirmware`, `runFirmware`, etc.) automatically bind (prompting for Windows UAC once if the
+> device is `Not shared`) and attach the board to WSL2. On native Windows, Linux, or macOS, `attachUsbWsl` is skipped
+> without affecting local serial port execution.
+
 #### Available tasks (`firmware` group)
 
 | Task              | Description                                                                      |
 |:------------------|:---------------------------------------------------------------------------------|
+| `attachUsbWsl`    | Binds and attaches a matching ESP32 USB device from Windows to WSL2 (`usbipd`).  |
 | `checkEnv`        | Verifies that the ESP-IDF environment and `idf.py` are properly configured.      |
 | `setChip`         | Sets the compilation target chip (e.g., `esp32c3`, `esp32s3`, `esp32`).          |
 | `buildFirmware`   | Builds the full firmware (bootloader, partition table, and application).         |
