@@ -43,17 +43,46 @@ pluginManagement {
 
 ### Użycie `plugin-esp-idf`
 
+Moduł ten udostępnia dwie uzupełniające się wtyczki dla projektów monorepo opartych o ESP-IDF:
+
+- `pl.miloszgilga.gradle.esp-idf` - opakowuje przepływy pracy `idf.py` i Doxygen, zarządza przyrostowym budowaniem
+  (cache) oraz eksportuje skompilowany plik binarny firmware'u poprzez konfigurację `firmwareBinary`,
+- `pl.miloszgilga.gradle.esp-idf-components` - udostępnia katalog podprojektu Gradle jako artefakt współdzielonych
+  komponentów C/C++ poprzez konfigurację `espComponents`, automatycznie przekazując flagę `-DEXTRA_COMPONENT_DIRS` do
+  CMake.
+
 > [!NOTE]
 > Aby korzystać z tej wtyczki, nadal trzeba mieć zainstalowane i skonfigurowane środowisko **ESP-IDF** w swoim systemie.
 > Wtyczka służy jako wygodna, wieloplatformowa nakładka dla projektów monorepo korzystających z Gradle Kotlin DSL.
 
-#### Konfiguracja
+#### Struktura projektu
 
-Wtyczkę należy zaaplikować, a rozszerzenie `espIdf` skonfigurować w pliku `build.gradle.kts` projektu firmware:
+```text
+monorepo-root/
+├── firmware/
+│   ├── common-components/   # aplikuje pl.miloszgilga.gradle.esp-idf-components
+│   └── device-app/          # aplikuje pl.miloszgilga.gradle.esp-idf
+└── settings.gradle.kts
+```
+
+#### Konfiguracja współdzielonych komponentów
+
+W module współdzielonych komponentów (`firmware/common-components/build.gradle.kts`):
 
 ```kotlin
 plugins {
-  id("pl.miloszgilga.gradle.esp-idf") version "X.X.X"
+  id("pl.miloszgilga.gradle.esp-idf-components") version "X.Y.Z"
+}
+```
+
+#### Konfiguracja firmware'u
+
+Wtyczkę `pl.miloszgilga.gradle.esp-idf` należy zaaplikować, dostosować rozszerzenie `espIdf` oraz podpiąć moduły
+współdzielonych komponentów poprzez `espComponents` w pliku `build.gradle.kts` projektu firmware:
+
+```kotlin
+plugins {
+  id("pl.miloszgilga.gradle.esp-idf") version "X.Y.Z"
 }
 
 espIdf {
@@ -61,6 +90,11 @@ espIdf {
   port.set("/dev/ttyACM0") // domyślnie: port szeregowy zależny od systemu (COM3, /dev/ttyACM0, /dev/cu.usbmodem101)
   baud.set("921600") // domyślnie: "921600"
   appVersion.set("1.0.0") // domyślnie: project.version (lub "0.0.1-local-dev", jeśli nie określono)
+  extraComponentDirs.from(rootProject.file("vendor/external-components")) // opcjonalnie: dodatkowe lokalne katalogi komponentów
+}
+
+dependencies {
+  espComponents(project(":firmware:common-components")) // opcjonalnie: współdzielone moduły komponentów Gradle
 }
 ```
 

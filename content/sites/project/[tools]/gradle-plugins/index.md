@@ -59,13 +59,41 @@ pluginManagement {
 
 ### Usage of `plugin-esp-idf`
 
+This module provides two complementary plugins for ESP-IDF monorepos:
+
+- `pl.miloszgilga.gradle.esp-idf` - wraps `idf.py` and Doxygen workflows, manages incremental build caching, and exports
+  the compiled firmware binary via the `firmwareBinary` configuration,
+- `pl.miloszgilga.gradle.esp-idf-components` - exposes a Gradle subproject directory as a consumable C/C++ component
+  artifact via the `espComponents` configuration, automatically passing `-DEXTRA_COMPONENT_DIRS` to CMake.
+
 > [!NOTE]
 > To use this plugin, you must still have the **ESP-IDF** framework installed and configured on your system. This plugin
 > serves as a convenient cross-platform wrapper for monorepo projects using Gradle Kotlin DSL.
 
-#### Configuration
+#### Project structure
 
-Apply the plugin and customize the `espIdf` extension in your firmware project's `build.gradle.kts`:
+```text
+monorepo-root/
+├── firmware/
+│   ├── common-components/   # applies pl.miloszgilga.gradle.esp-idf-components
+│   └── device-app/          # applies pl.miloszgilga.gradle.esp-idf
+└── settings.gradle.kts
+```
+
+#### Shared components configuration
+
+In your shared components module (`firmware/common-components/build.gradle.kts`):
+
+```kotlin
+plugins {
+  id("pl.miloszgilga.gradle.esp-idf-components") version "X.Y.Z"
+}
+```
+
+#### Firmware configuration
+
+Apply `pl.miloszgilga.gradle.esp-idf`, customize the `espIdf` extension, and link shared component modules via
+`espComponents` in your firmware project's `build.gradle.kts`:
 
 ```kotlin
 plugins {
@@ -77,6 +105,11 @@ espIdf {
   port.set("/dev/ttyACM0") // default: OS-specific serial port (COM3, /dev/ttyACM0, /dev/cu.usbmodem101)
   baud.set("921600") // default: "921600"
   appVersion.set("1.0.0") // default: project.version (or "0.0.1-local-dev" if unspecified)
+  extraComponentDirs.from(rootProject.file("vendor/external-components")) // optional: additional local component dirs
+}
+
+dependencies {
+  espComponents(project(":firmware:common-components")) // optional: shared Gradle component modules
 }
 ```
 
