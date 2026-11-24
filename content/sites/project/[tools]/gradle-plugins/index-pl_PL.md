@@ -100,7 +100,7 @@ dependencies {
 }
 ```
 
-> [!TIP]
+> [!NOTE]
 > Podczas korzystania z `usbipdAutoAttach` należy pamiętać, że system Windows nie posiada wbudowanego narzędzia
 > `usbipd` - należy je jednorazowo zainstalować po stronie Windowsa z projektu
 > [usbipd-win](https://github.com/dorssel/usbipd-win) (`winget install --interactive --exact dorssel.usbipd-win`). Gdy
