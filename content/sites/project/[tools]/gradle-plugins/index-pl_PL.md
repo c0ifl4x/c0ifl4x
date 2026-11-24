@@ -109,7 +109,7 @@ dependencies {
 > status `Not shared`) i podepną płytkę do WSL2. Przy uruchomieniu bezpośrednio na natywnym Windowsie, Linuxie lub macOS
 > zadanie `attachUsbWsl` jest pomijane, a komendy `idf.py` korzystają ze standardowego portu lokalnego.
 
-#### Dostępne zadania (grupa `firmware`)
+#### Dostępne zadania (`esp-idf`)
 
 | Zadanie           | Opis                                                                                      |
 |:------------------|:------------------------------------------------------------------------------------------|
@@ -212,11 +212,11 @@ można pominąć budowanie i pakowanie zasobów frontendowych, przekazując wła
 Gdy flaga jest aktywna, konfiguracja `uiResources` jest wykluczana z grafu wykonania zadań, dzięki czemu `yarnInstall`
 oraz `buildWeb` nie są uruchamiane.
 
-#### Dostępne zadania
+#### Dostępne zadania (`frontend-builder`)
 
-| Zadanie       | Plugin             | Grupa         | Opis                                                                          |
-|:--------------|:-------------------|:--------------|:------------------------------------------------------------------------------|
-| `yarnInstall` | `frontend-builder` | `node`        | Instaluje zależności frontendowe za pomocą Yarn.                              |
-| `yarnDev`     | `frontend-builder` | `application` | Uruchamia lokalny serwer deweloperski frontendu (`yarn run dev`).             |
-| `buildWeb`    | `frontend-builder` | `build`       | Kompiluje produkcyjną paczkę frontendową i publikuje artefakt `webResources`. |
-| `clean`       | `frontend-builder` | `build`       | Usuwa wygenerowany katalog budowania oraz elementy z `additionalDeletes`.     |
+| Zadanie       | Opis                                                                          |
+|:--------------|:------------------------------------------------------------------------------|
+| `yarnInstall` | Instaluje zależności frontendowe za pomocą Yarn.                              |
+| `yarnDev`     | Uruchamia lokalny serwer deweloperski frontendu (`yarn run dev`).             |
+| `buildWeb`    | Kompiluje produkcyjną paczkę frontendową i publikuje artefakt `webResources`. |
+| `clean`       | Usuwa wygenerowany katalog budowania oraz elementy z `additionalDeletes`.     |

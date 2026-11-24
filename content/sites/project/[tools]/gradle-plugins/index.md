@@ -123,7 +123,7 @@ dependencies {
 > device is `Not shared`) and attach the board to WSL2. On native Windows, Linux, or macOS, `attachUsbWsl` is skipped
 > without affecting local serial port execution.
 
-#### Available tasks (`firmware` group)
+#### Available tasks (`esp-idf`)
 
 | Task              | Description                                                                      |
 |:------------------|:---------------------------------------------------------------------------------|
@@ -222,11 +222,11 @@ bundling frontend assets by passing the `-PskipWebEmbed` project property:
 
 When active, `uiResources` is excluded from the task execution graph, so `yarnInstall` and `buildWeb` are not triggered.
 
-#### Available tasks
+#### Available tasks (`frontend-builder`)
 
-| Task          | Plugin             | Group         | Description                                                            |
-|:--------------|:-------------------|:--------------|:-----------------------------------------------------------------------|
-| `yarnInstall` | `frontend-builder` | `node`        | Installs frontend dependencies via Yarn.                               |
-| `yarnDev`     | `frontend-builder` | `application` | Starts the local frontend development server (`yarn run dev`).         |
-| `buildWeb`    | `frontend-builder` | `build`       | Compiles the production frontend bundle and publishes `webResources`.  |
-| `clean`       | `frontend-builder` | `build`       | Removes the generated build directory and `additionalDeletes` entries. |
+| Task          | Description                                                            |
+|:--------------|:-----------------------------------------------------------------------|
+| `yarnInstall` | Installs frontend dependencies via Yarn.                               |
+| `yarnDev`     | Starts the local frontend development server (`yarn run dev`).         |
+| `buildWeb`    | Compiles the production frontend bundle and publishes `webResources`.  |
+| `clean`       | Removes the generated build directory and `additionalDeletes` entries. |
