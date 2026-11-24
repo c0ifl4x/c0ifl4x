@@ -117,7 +117,7 @@ Należy zaaplikować `pl.miloszgilga.gradle.frontend-builder` oraz opcjonalnie d
 
 ```kotlin
 plugins {
-  id("pl.miloszgilga.gradle.frontend-builder") version "X.X.X"
+  id("pl.miloszgilga.gradle.frontend-builder") version "X.Y.Z"
 }
 
 frontendBuilder {
@@ -142,7 +142,7 @@ wymagana:
 ```kotlin
 plugins {
   application
-  id("pl.miloszgilga.gradle.web-embed") version "X.X.X"
+  id("pl.miloszgilga.gradle.web-embed") version "X.Y.Z"
 }
 
 // Opcjonalna konfiguracja:
