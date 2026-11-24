@@ -20,16 +20,21 @@ repoUrls:
 downloadUrls:
   - name: "ESP-IDF plugin (JAR)"
     url: "https://m2.miloszgilga.pl/#/releases/pl/miloszgilga/gradle/plugin-esp-idf"
+  - name: "WebEmbed plugin (JAR)"
+    url: "https://m2.miloszgilga.pl/#/releases/pl/miloszgilga/gradle/plugin-web-embed"
 docsUrls:
   - name: "ESP-IDF plugin (Javadoc)"
     url: "https://m2.miloszgilga.pl/javadoc/releases/pl/miloszgilga/gradle/plugin-esp-idf/latest"
+  - name: "WebEmbed plugin (Javadoc)"
+    url: "https://m2.miloszgilga.pl/javadoc/releases/pl/miloszgilga/gradle/plugin-web-embed/latest"
 ---
 
 ## Available plugins
 
-| Module           | Plugin ID                      | Description                                                                          | Docs                                                                                              | Repository                                                                              |
-|:-----------------|:-------------------------------|:-------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------|
-| `plugin-esp-idf` | `pl.miloszgilga.gradle.espidf` | Cross-platform Gradle wrapper for ESP-IDF firmware projects (Windows, Linux, macOS). | [Javadoc](https://m2.miloszgilga.pl/javadoc/releases/pl/miloszgilga/gradle/plugin-esp-idf/latest) | [Reposilite](https://m2.miloszgilga.pl/#/releases/pl/miloszgilga/gradle/plugin-esp-idf) |
+| Module             | Plugin ID                                                                     | Description                                                                          | Docs                                                                                                | Repository                                                                                |
+|:-------------------|:------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------|
+| `plugin-esp-idf`   | `pl.miloszgilga.gradle.esp-idf`                                               | Cross-platform Gradle wrapper for ESP-IDF firmware projects (Windows, Linux, macOS). | [Javadoc](https://m2.miloszgilga.pl/javadoc/releases/pl/miloszgilga/gradle/plugin-esp-idf/latest)   | [Reposilite](https://m2.miloszgilga.pl/#/releases/pl/miloszgilga/gradle/plugin-esp-idf)   |
+| `plugin-web-embed` | `pl.miloszgilga.gradle.frontend-builder`<br>`pl.miloszgilga.gradle.web-embed` | Builds frontend assets via Node/Yarn and embeds them into JVM server resources.      | [Javadoc](https://m2.miloszgilga.pl/javadoc/releases/pl/miloszgilga/gradle/plugin-web-embed/latest) | [Reposilite](https://m2.miloszgilga.pl/#/releases/pl/miloszgilga/gradle/plugin-web-embed) |
 
 ## Usage
 
@@ -64,7 +69,7 @@ Apply the plugin and customize the `espIdf` extension in your firmware project's
 
 ```kotlin
 plugins {
-  id("pl.miloszgilga.gradle.espidf") version "X.X.X"
+  id("pl.miloszgilga.gradle.esp-idf") version "X.Y.Z"
 }
 
 espIdf {
@@ -91,3 +96,93 @@ espIdf {
 | `eraseFlash`      | Erases the entire flash memory on the chip (including NVS and other partitions). |
 | `cleanFirmware`   | Cleans build output files (`idf.py fullclean`).                                  |
 | `generateDocs`    | Generates project documentation using Doxygen.                                   |
+
+### Usage of `plugin-web-embed`
+
+This module provides two complementary plugins designed for monorepo setups where a JVM backend embeds a compiled
+Node/Yarn frontend application (such as Svelte, React, or Vite):
+
+- `pl.miloszgilga.gradle.frontend-builder` - manages Node.js/Yarn toolchains, runs dev/build scripts, and exposes the
+  compiled output directory via the `webResources` Gradle configuration,
+- `pl.miloszgilga.gradle.web-embed` - resolves the `webResources` artifact from a frontend module and packages it into
+  the JVM classpath resources during `processResources`.
+
+> [!TIP]
+> Because `web-embed` hooks directly into Gradle's standard `processResources` task, packaging plugins such as
+> `shadowJar` or `jib` (`jibDockerBuild`) automatically trigger the frontend build (`yarnInstall` -> `buildWeb`) and
+> bundle the compiled assets into the target classpath directory without requiring manual task dependencies. Thanks to
+> Gradle's incremental build caching, modifying only backend code skips rebuilding the frontend (`UP-TO-DATE`).
+
+#### Project structure
+
+By default, `web-embed` automatically detects and wires a sibling `:ui` subproject under the same parent module:
+
+```text
+monorepo-root/
+├── my-service/
+│   ├── server/   # applies pl.miloszgilga.gradle.web-embed
+│   └── ui/       # applies pl.miloszgilga.gradle.frontend-builder
+└── settings.gradle.kts
+```
+
+#### Frontend configuration
+
+Apply `pl.miloszgilga.gradle.frontend-builder` and optionally customize the `frontendBuilder` extension:
+
+```kotlin
+plugins {
+  id("pl.miloszgilga.gradle.frontend-builder") version "X.Y.Z"
+}
+
+frontendBuilder {
+  nodeVersion.set("26.13.1") // default: "26.13.1"
+  yarnVersion.set("1.22.22") // default: "1.22.22"
+  downloadNode.set(true) // default: true
+  buildDirName.set("dist") // default: "dist" (for standard Vite setups)
+  devScript.set("dev") // default: "dev"
+  buildScript.set("build") // default: "build"
+  inputFiles.set(listOf("package.json", "tsconfig.json", "vite.config.ts", "yarn.lock"))
+  additionalInputs.from("public") // optional extra files or directories tracked by buildWeb
+  additionalDeletes.from(".vite") // optional extra files or directories removed during clean
+}
+```
+
+#### Backend configuration
+
+Apply `pl.miloszgilga.gradle.web-embed` alongside any JVM plugin (`java`, `application`, `org.jetbrains.kotlin.jvm`,
+etc.). If a sibling `:ui` project exists, zero configuration is required:
+
+```kotlin
+plugins {
+  application
+  id("pl.miloszgilga.gradle.web-embed") version "X.Y.Z"
+}
+
+// Optional customization:
+webEmbed {
+  uiProject.set(":my-service:ui") // optional: overrides automatic sibling :ui resolution
+  targetDir.set("webapp") // default: "webapp" (maps to src/main/resources/webapp)
+  autoWireSiblingUi.set(true) // default: true
+  skip.set(false) // default: false (can also be toggled via -PskipWebEmbed)
+}
+```
+
+#### Skipping frontend build
+
+During local development when running the backend and UI dev server separately (`yarnDev`), you can skip building and
+bundling frontend assets by passing the `-PskipWebEmbed` project property:
+
+```bash
+./gradlew :my-service:server:run -PskipWebEmbed
+```
+
+When active, `uiResources` is excluded from the task execution graph, so `yarnInstall` and `buildWeb` are not triggered.
+
+#### Available tasks
+
+| Task          | Plugin             | Group         | Description                                                            |
+|:--------------|:-------------------|:--------------|:-----------------------------------------------------------------------|
+| `yarnInstall` | `frontend-builder` | `node`        | Installs frontend dependencies via Yarn.                               |
+| `yarnDev`     | `frontend-builder` | `application` | Starts the local frontend development server (`yarn run dev`).         |
+| `buildWeb`    | `frontend-builder` | `build`       | Compiles the production frontend bundle and publishes `webResources`.  |
+| `clean`       | `frontend-builder` | `build`       | Removes the generated build directory and `additionalDeletes` entries. |
