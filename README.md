@@ -20,9 +20,8 @@ microservices stack. [Source code and thesis (LaTeX)](https://github.com/vispher
   high-performance core framework,
 - [home-theater-automation-system](https://github.com/c0ifl4x/home-theater-automation-system) - IoT project based on
   ESP32, FreeRTOS, WSS, RS232/485 and Android app,
-- [intelligent-doorbell-system](https://github.com/c0ifl4x/intelligent-doorbell-system) - Fail-safe IoT platform based
-  on
-  ESP32C3 (RISC-V), MQTT and custom Java relay server,
+- [intelligent-home-automation](https://github.com/c0ifl4x/intelligent-home-automation) - Fail-safe IoT platform based
+  on ESP32C3 (RISC-V), MQTT and custom Kotlin relay server,
 - [event-proxy-system](https://github.com/c0ifl4x/event-proxy-system) - lightweight event proxy system with dummy SMTP
   service,
 - [webrtc-hangout-app](https://github.com/c0ifl4x/webrtc-hangout-app) - video hangout app using WebRTC together with
