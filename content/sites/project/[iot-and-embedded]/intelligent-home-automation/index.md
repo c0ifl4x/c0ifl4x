@@ -11,7 +11,7 @@ tech:
   - "ESP32"
   - "FreeRTOS"
   - "C"
-  - "Java"
+  - "Kotlin"
   - "MQTT"
   - "mDNS"
 status: "wip"
