@@ -8,6 +8,7 @@ techDetails:
   - "MySQL oraz JDBC Spring data"
   - "React oraz TanStack Query"
   - "biblioteka komponentów MUI"
+  - "kontenery Docker"
 downloadUrls:
   - name: "Ekstraktor danych"
     url: "https://github.com/c0ifl4x/tv-archives-aggregator/releases/latest"

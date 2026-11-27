@@ -13,6 +13,7 @@ tech:
   - "Angular"
   - "Typescript"
   - "RxJS"
+  - "Docker"
 status: "completed"
 pinned: false
 weight: 0

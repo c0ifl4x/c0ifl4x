@@ -13,6 +13,7 @@ tech:
   - "SQLite"
   - "Electron"
   - "React"
+  - "Docker"
 status: "maintained"
 modifiers:
   - "featured"

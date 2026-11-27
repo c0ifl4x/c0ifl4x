@@ -15,6 +15,7 @@ tech:
   - "Typescript"
   - "RxJS"
   - "Tailwind"
+  - "Docker"
 status: "completed"
 pinned: true
 weight: 0

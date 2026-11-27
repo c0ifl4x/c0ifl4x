@@ -11,6 +11,7 @@ tech:
   - "PHP"
   - "MySQL"
   - "Handlebars"
+  - "Docker"
 techDetails:
   - "PHP 7.4"
   - "Mustache template engine"
@@ -18,6 +19,7 @@ techDetails:
   - "Bootstrap"
   - "Chart.js"
   - "jQuery"
+  - "Docker containers (for development and production as well)"
 status: "completed"
 pinned: true
 weight: 0

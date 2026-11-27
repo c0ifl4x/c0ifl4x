@@ -16,6 +16,7 @@ tech:
   - "JSP"
   - "jQuery"
   - "Bootstrap"
+  - "Docker"
 techDetails:
   - "Java (Jakarta) EE 9 with EJB (Enterprise Java Bean)"
   - "MySQL relational database system"

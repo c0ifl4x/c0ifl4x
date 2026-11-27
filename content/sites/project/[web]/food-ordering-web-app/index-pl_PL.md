@@ -7,6 +7,7 @@ techDetails:
   - "Bootstrap"
   - "Chart.js"
   - "jQuery"
+  - "kontenery Docker (dla fazy dewelopmentu jak i produkcji)"
 downloadUrls:
   - name: "Obraz docker"
     url: "https://hub.docker.com/r/milosz08/food-ordering-web-app"

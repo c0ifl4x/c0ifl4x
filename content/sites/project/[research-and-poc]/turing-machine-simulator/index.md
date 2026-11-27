@@ -10,6 +10,7 @@ summary: "An advanced single-tape deterministic Turing Machine simulator with AS
 tech:
   - "React"
   - "Typescript"
+  - "Docker"
 techDetails:
   - "React 18"
   - "React DOM 18"
@@ -18,6 +19,7 @@ techDetails:
   - "Webpack 5"
   - "Styled components"
   - "Redux toolkit"
+  - "Docker containers"
 status: "completed"
 pinned: true
 weight: 0

@@ -18,6 +18,7 @@ tech:
   - "SvelteKit"
   - "Typescript"
   - "Tailwind"
+  - "Docker"
 status: "wip"
 modifiers:
   - "featured"

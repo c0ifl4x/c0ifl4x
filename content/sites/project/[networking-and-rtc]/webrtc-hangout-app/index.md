@@ -11,6 +11,7 @@ tech:
   - "Node.js"
   - "React"
   - "WebRTC"
+  - "Docker"
 status: "completed"
 pinned: true
 weight: 0

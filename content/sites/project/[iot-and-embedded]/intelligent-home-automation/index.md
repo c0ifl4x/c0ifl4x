@@ -14,6 +14,7 @@ tech:
   - "Kotlin"
   - "MQTT"
   - "mDNS"
+  - "Docker"
 status: "wip"
 modifiers:
   - "featured"

@@ -14,6 +14,7 @@ tech:
   - "Android"
   - "Kotlin"
   - "Python"
+  - "Docker"
 status: "maintained"
 modifiers:
   - "featured"

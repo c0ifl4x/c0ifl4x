@@ -12,6 +12,7 @@ tech:
   - "Spring Boot"
   - "MySQL"
   - "React"
+  - "Docker"
 status: "completed"
 pinned: false
 weight: 0

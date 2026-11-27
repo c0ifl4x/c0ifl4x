@@ -1,6 +1,15 @@
 ---
 kind: "Kompilator i symulator"
 summary: "Zaawansowany symulator jednotaśmowej, deterministycznej maszyny Turinga z obsługą składni ASM oraz autorskim kompilatorem AoT."
+techDetails:
+  - "React 18"
+  - "React DOM 18"
+  - "React Router 6"
+  - "Typescript"
+  - "Webpack 5"
+  - "Styled components"
+  - "Redux toolkit"
+  - "kontenery Docker"
 downloadUrls:
   - name: "Obraz docker"
     url: "https://hub.docker.com/r/milosz08/turing-machine-simulator-app"

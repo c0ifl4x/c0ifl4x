@@ -17,6 +17,7 @@ tech:
   - "Next.js"
   - "React"
   - "Python"
+  - "Docker"
 status: "abandoned"
 pinned: true
 weight: 0

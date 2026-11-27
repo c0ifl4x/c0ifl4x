@@ -11,6 +11,7 @@ tech:
   - "Java"
   - "SpringBoot"
   - "MySQL"
+  - "Docker"
 techDetails:
   - "Java 17"
   - "Spring Boot 3"

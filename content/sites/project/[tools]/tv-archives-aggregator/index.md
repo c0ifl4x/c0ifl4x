@@ -15,6 +15,7 @@ tech:
   - "React"
   - "Typescript"
   - "MUI"
+  - "Docker"
 techDetails:
   - "Java SE 17"
   - "Swing UI"
@@ -22,6 +23,7 @@ techDetails:
   - "MySQL with JDBC Spring data"
   - "React with TanStack Query"
   - "MUI components library"
+  - "Docker containers"
 status: "maintained"
 pinned: true
 weight: 0
